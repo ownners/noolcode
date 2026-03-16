@@ -1,19 +1,19 @@
 import type { APIEvent } from "@solidjs/start/server"
-import { and, Database, eq, isNull, lt, or, sql } from "@opencode-ai/console-core/drizzle/index.js"
-import { KeyTable } from "@opencode-ai/console-core/schema/key.sql.js"
-import { BillingTable, LiteTable, SubscriptionTable, UsageTable } from "@opencode-ai/console-core/schema/billing.sql.js"
-import { centsToMicroCents } from "@opencode-ai/console-core/util/price.js"
-import { getMonthlyBounds, getWeekBounds } from "@opencode-ai/console-core/util/date.js"
-import { Identifier } from "@opencode-ai/console-core/identifier.js"
-import { Billing } from "@opencode-ai/console-core/billing.js"
-import { Actor } from "@opencode-ai/console-core/actor.js"
-import { WorkspaceTable } from "@opencode-ai/console-core/schema/workspace.sql.js"
-import { ZenData } from "@opencode-ai/console-core/model.js"
-import { Subscription } from "@opencode-ai/console-core/subscription.js"
-import { BlackData } from "@opencode-ai/console-core/black.js"
-import { UserTable } from "@opencode-ai/console-core/schema/user.sql.js"
-import { ModelTable } from "@opencode-ai/console-core/schema/model.sql.js"
-import { ProviderTable } from "@opencode-ai/console-core/schema/provider.sql.js"
+import { and, Database, eq, isNull, lt, or, sql } from "@noolcode/console-core/drizzle/index.js"
+import { KeyTable } from "@noolcode/console-core/schema/key.sql.js"
+import { BillingTable, LiteTable, SubscriptionTable, UsageTable } from "@noolcode/console-core/schema/billing.sql.js"
+import { centsToMicroCents } from "@noolcode/console-core/util/price.js"
+import { getMonthlyBounds, getWeekBounds } from "@noolcode/console-core/util/date.js"
+import { Identifier } from "@noolcode/console-core/identifier.js"
+import { Billing } from "@noolcode/console-core/billing.js"
+import { Actor } from "@noolcode/console-core/actor.js"
+import { WorkspaceTable } from "@noolcode/console-core/schema/workspace.sql.js"
+import { ZenData } from "@noolcode/console-core/model.js"
+import { Subscription } from "@noolcode/console-core/subscription.js"
+import { BlackData } from "@noolcode/console-core/black.js"
+import { UserTable } from "@noolcode/console-core/schema/user.sql.js"
+import { ModelTable } from "@noolcode/console-core/schema/model.sql.js"
+import { ProviderTable } from "@noolcode/console-core/schema/provider.sql.js"
 import { logger } from "./logger"
 import {
   AuthError,
@@ -33,8 +33,8 @@ import { createRateLimiter } from "./rateLimiter"
 import { createDataDumper } from "./dataDumper"
 import { createTrialLimiter } from "./trialLimiter"
 import { createStickyTracker } from "./stickyProviderTracker"
-import { LiteData } from "@opencode-ai/console-core/lite.js"
-import { Resource } from "@opencode-ai/console-resource"
+import { LiteData } from "@noolcode/console-core/lite.js"
+import { Resource } from "@noolcode/console-resource"
 import { i18n, type Key } from "~/i18n"
 import { localeFromRequest } from "~/lib/language"
 
@@ -702,8 +702,8 @@ export async function handler(
 
     // Validate pay as you go billing
     const billing = authInfo.billing
-    const billingUrl = `https://opencode.ai/workspace/${authInfo.workspaceID}/billing`
-    const membersUrl = `https://opencode.ai/workspace/${authInfo.workspaceID}/members`
+    const billingUrl = `https://noolcode.ai/workspace/${authInfo.workspaceID}/billing`
+    const membersUrl = `https://noolcode.ai/workspace/${authInfo.workspaceID}/members`
     if (!billing.paymentMethodID) throw new CreditsError(t("zen.api.error.noPaymentMethod", { billingUrl }))
     if (billing.balance <= 0) throw new CreditsError(t("zen.api.error.insufficientBalance", { billingUrl }))
 

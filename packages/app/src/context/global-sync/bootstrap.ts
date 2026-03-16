@@ -8,10 +8,10 @@ import type {
   ProviderListResponse,
   QuestionRequest,
   Todo,
-} from "@opencode-ai/sdk/v2/client"
-import { showToast } from "@opencode-ai/ui/toast"
-import { getFilename } from "@opencode-ai/util/path"
-import { retry } from "@opencode-ai/util/retry"
+} from "@noolcode/sdk/v2/client"
+import { showToast } from "@noolcode/ui/toast"
+import { getFilename } from "@noolcode/util/path"
+import { retry } from "@noolcode/util/retry"
 import { batch } from "solid-js"
 import { reconcile, type SetStoreFunction, type Store } from "solid-js/store"
 import type { State, VcsCache } from "./types"

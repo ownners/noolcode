@@ -36,7 +36,7 @@ describe("parseReadableConfigInvalidError", () => {
     const error = {
       name: "ConfigInvalidError",
       data: {
-        path: "opencode.config.ts",
+        path: "noolcode.config.ts",
         issues: [
           { path: ["settings", "host"], message: "Required" },
           { path: ["mode"], message: "Invalid" },

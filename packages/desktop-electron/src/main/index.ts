@@ -14,12 +14,12 @@ const APP_NAMES: Record<string, string> = {
   prod: "OpenCode",
 }
 const APP_IDS: Record<string, string> = {
-  dev: "ai.opencode.desktop.dev",
-  beta: "ai.opencode.desktop.beta",
-  prod: "ai.opencode.desktop",
+  dev: "ai.noolcode.desktop.dev",
+  beta: "ai.noolcode.desktop.beta",
+  prod: "ai.noolcode.desktop",
 }
 app.setName(app.isPackaged ? APP_NAMES[CHANNEL] : "OpenCode Dev")
-app.setPath("userData", join(app.getPath("appData"), app.isPackaged ? APP_IDS[CHANNEL] : "ai.opencode.desktop.dev"))
+app.setPath("userData", join(app.getPath("appData"), app.isPackaged ? APP_IDS[CHANNEL] : "ai.noolcode.desktop.dev"))
 const { autoUpdater } = pkg
 
 import type { InitStep, ServerReadyData, SqliteMigrationProgress, WslConfig } from "../preload/types"
@@ -83,7 +83,7 @@ function setupApp() {
 
   void app.whenReady().then(async () => {
     // migrate()
-    app.setAsDefaultProtocolClient("opencode")
+    app.setAsDefaultProtocolClient("noolcode")
     setDockIcon()
     setupAutoUpdater()
     syncCli()
@@ -124,7 +124,7 @@ async function initialize() {
   sidecar = child
   serverReady.resolve({
     url,
-    username: "opencode",
+    username: "noolcode",
     password,
   })
 
@@ -259,7 +259,7 @@ function ensureLoopbackNoProxy() {
 }
 
 async function getSidecarPort() {
-  const fromEnv = process.env.OPENCODE_PORT
+  const fromEnv = process.env.NOOLCODE_PORT
   if (fromEnv) {
     const parsed = Number.parseInt(fromEnv, 10)
     if (!Number.isNaN(parsed)) return parsed
@@ -284,7 +284,7 @@ async function getSidecarPort() {
 function sqliteFileExists() {
   const xdg = process.env.XDG_DATA_HOME
   const base = xdg && xdg.length > 0 ? xdg : join(homedir(), ".local", "share")
-  return existsSync(join(base, "opencode", "opencode.db"))
+  return existsSync(join(base, "noolcode", "noolcode.db"))
 }
 
 function setupAutoUpdater() {

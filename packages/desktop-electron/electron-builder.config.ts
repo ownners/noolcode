@@ -1,7 +1,7 @@
 import type { Configuration } from "electron-builder"
 
 const channel = (() => {
-  const raw = process.env.OPENCODE_CHANNEL
+  const raw = process.env.NOOLCODE_CHANNEL
   if (raw === "dev" || raw === "beta" || raw === "prod") return raw
   return "dev"
 })()
@@ -40,7 +40,7 @@ const getBase = (): Configuration => ({
   },
   protocols: {
     name: "OpenCode",
-    schemes: ["opencode"],
+    schemes: ["noolcode"],
   },
   win: {
     icon: `resources/icons/icon.ico`,
@@ -66,7 +66,7 @@ function getConfig() {
     case "dev": {
       return {
         ...base,
-        appId: "ai.opencode.desktop.dev",
+        appId: "ai.noolcode.desktop.dev",
         productName: "OpenCode Dev",
         rpm: { packageName: "opencode-dev" },
       }
@@ -74,9 +74,9 @@ function getConfig() {
     case "beta": {
       return {
         ...base,
-        appId: "ai.opencode.desktop.beta",
+        appId: "ai.noolcode.desktop.beta",
         productName: "OpenCode Beta",
-        protocols: { name: "OpenCode Beta", schemes: ["opencode"] },
+        protocols: { name: "OpenCode Beta", schemes: ["noolcode"] },
         publish: { provider: "github", owner: "anomalyco", repo: "opencode-beta", channel: "latest" },
         rpm: { packageName: "opencode-beta" },
       }
@@ -84,11 +84,11 @@ function getConfig() {
     case "prod": {
       return {
         ...base,
-        appId: "ai.opencode.desktop",
+        appId: "ai.noolcode.desktop",
         productName: "OpenCode",
-        protocols: { name: "OpenCode", schemes: ["opencode"] },
-        publish: { provider: "github", owner: "anomalyco", repo: "opencode", channel: "latest" },
-        rpm: { packageName: "opencode" },
+        protocols: { name: "OpenCode", schemes: ["noolcode"] },
+        publish: { provider: "github", owner: "anomalyco", repo: "noolcode", channel: "latest" },
+        rpm: { packageName: "noolcode" },
       }
     }
   }

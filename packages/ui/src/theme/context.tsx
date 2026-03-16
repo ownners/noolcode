@@ -8,10 +8,10 @@ import type { DesktopTheme } from "./types"
 export type ColorScheme = "light" | "dark" | "system"
 
 const STORAGE_KEYS = {
-  THEME_ID: "opencode-theme-id",
+  THEME_ID: "noolcode-theme-id",
   COLOR_SCHEME: "opencode-color-scheme",
-  THEME_CSS_LIGHT: "opencode-theme-css-light",
-  THEME_CSS_DARK: "opencode-theme-css-dark",
+  THEME_CSS_LIGHT: "noolcode-theme-css-light",
+  THEME_CSS_DARK: "noolcode-theme-css-dark",
 } as const
 
 const THEME_STYLE_ID = "oc-theme"

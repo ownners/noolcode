@@ -1,9 +1,9 @@
 import type { APIEvent } from "@solidjs/start/server"
-import { and, Database, eq, isNull } from "@opencode-ai/console-core/drizzle/index.js"
-import { KeyTable } from "@opencode-ai/console-core/schema/key.sql.js"
-import { WorkspaceTable } from "@opencode-ai/console-core/schema/workspace.sql.js"
-import { ModelTable } from "@opencode-ai/console-core/schema/model.sql.js"
-import { ZenData } from "@opencode-ai/console-core/model.js"
+import { and, Database, eq, isNull } from "@noolcode/console-core/drizzle/index.js"
+import { KeyTable } from "@noolcode/console-core/schema/key.sql.js"
+import { WorkspaceTable } from "@noolcode/console-core/schema/workspace.sql.js"
+import { ModelTable } from "@noolcode/console-core/schema/model.sql.js"
+import { ZenData } from "@noolcode/console-core/model.js"
 
 export async function OPTIONS(input: APIEvent) {
   return new Response(null, {
@@ -30,7 +30,7 @@ export async function GET(input: APIEvent) {
           id,
           object: "model",
           created: Math.floor(Date.now() / 1000),
-          owned_by: "opencode",
+          owned_by: "noolcode",
         })),
     }),
     {

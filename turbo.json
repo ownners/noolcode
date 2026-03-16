@@ -8,11 +8,11 @@
       "dependsOn": [],
       "outputs": ["dist/**"]
     },
-    "opencode#test": {
+    "noolcode#test": {
       "dependsOn": ["^build"],
       "outputs": []
     },
-    "@opencode-ai/app#test": {
+    "@noolcode-ai/app#test": {
       "dependsOn": ["^build"],
       "outputs": []
     }

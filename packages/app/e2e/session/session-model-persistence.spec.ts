@@ -1,4 +1,4 @@
-import { base64Decode } from "@opencode-ai/util/encode"
+import { base64Decode } from "@noolcode/util/encode"
 import type { Locator, Page } from "@playwright/test"
 import { test, expect } from "../fixtures"
 import { openSidebar, sessionIDFromUrl, setWorkspacesEnabled, waitSessionIdle, waitSlug } from "../actions"
@@ -35,13 +35,13 @@ const dirKey = (state: Probe | null) => state?.dir ?? ""
 async function probe(page: Page): Promise<Probe | null> {
   return page.evaluate(() => {
     const win = window as Window & {
-      __opencode_e2e?: {
+      __noolcode_e2e?: {
         model?: {
           current?: Probe
         }
       }
     }
-    return win.__opencode_e2e?.model?.current ?? null
+    return win.__noolcode_e2e?.model?.current ?? null
   })
 }
 
