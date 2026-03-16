@@ -37,7 +37,7 @@ export function createCommentMetadata(input: PromptComment) {
 
 export function readCommentMetadata(value: unknown) {
   if (!value || typeof value !== "object") return
-  const meta = (value as { opencodeComment?: unknown }).noolcodeComment
+  const meta = (value as { opencodeComment?: unknown }).opencodeComment
   if (!meta || typeof meta !== "object") return
   const path = (meta as { path?: unknown }).path
   const comment = (meta as { comment?: unknown }).comment
