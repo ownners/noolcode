@@ -15,6 +15,8 @@ import { Plugin } from "@/plugin"
 import { Config } from "@/config/config"
 import { ProviderTransform } from "@/provider/transform"
 import { ModelID, ProviderID } from "@/provider/schema"
+import { ContextMonitor } from "@/context/monitor"
+import { SessionRelay } from "@/context/relay"
 
 export namespace SessionCompaction {
   const log = Log.create({ service: "session.compaction" })
@@ -33,6 +35,7 @@ export namespace SessionCompaction {
   export async function isOverflow(input: { tokens: MessageV2.Assistant["tokens"]; model: Provider.Model }) {
     const config = await Config.get()
     if (config.compaction?.auto === false) return false
+
     const context = input.model.limit.context
     if (context === 0) return false
 
@@ -45,6 +48,36 @@ export namespace SessionCompaction {
     const usable = input.model.limit.input
       ? input.model.limit.input - reserved
       : context - ProviderTransform.maxOutputTokens(input.model)
+
+    // 使用 ContextMonitor 检查是否需要接力
+    if (config.compaction?.relay_enabled) {
+      const status = await ContextMonitor.check({
+        tokens: {
+          total: input.tokens.total ?? 0,
+          input: input.tokens.input,
+          output: input.tokens.output,
+          reasoning: input.tokens.reasoning,
+          cache: {
+            read: input.tokens.cache.read,
+            write: input.tokens.cache.write,
+          }
+        },
+        model: {
+          limit: {
+            context: input.model.limit.context,
+            context_optimal: input.model.limit.context_optimal,
+            context_warning: input.model.limit.context_warning,
+            input: input.model.limit.input,
+            output: input.model.limit.output
+          }
+        }
+      })
+
+      if (status.shouldRelay) {
+        log.info("Context relay threshold reached", { level: status.level, tokens: count, usable })
+      }
+    }
+
     return count >= usable
   }
 
