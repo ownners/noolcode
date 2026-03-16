@@ -1199,6 +1199,14 @@ export namespace Config {
             .min(0)
             .optional()
             .describe("Token buffer for compaction. Leaves enough window to avoid overflow during compaction."),
+          relay_enabled: z
+            .boolean()
+            .optional()
+            .describe("Enable session relay when optimal context window is exceeded (default: false)"),
+          relay_strategy: z
+            .enum(["optimal", "warning", "critical"])
+            .optional()
+            .describe("Strategy for triggering session relay (default: optimal)"),
         })
         .optional(),
       experimental: z

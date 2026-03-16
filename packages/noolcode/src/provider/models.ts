@@ -52,6 +52,8 @@ export namespace ModelsDev {
       .optional(),
     limit: z.object({
       context: z.number(),
+      context_optimal: z.number().optional(),      // 最佳推理窗口
+      context_warning: z.number().optional(),      // 预警阈值
       input: z.number().optional(),
       output: z.number(),
     }),
